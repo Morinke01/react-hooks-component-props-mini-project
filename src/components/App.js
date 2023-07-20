@@ -1,15 +1,67 @@
 import React from "react";
 import blogData from "../data/blog";
 
-console.log(blogData);
+//console.log(blogData);
 
 function App() {
   return (
     <div className="App">
-      You're on your own from here! Follow the deliverables; test things out in
-      the browser as you write your code; and good luck!
+      <Header />
+      <About />
+      <ArticleList />
     </div>
+
   );
+
+}
+function Header(props) {
+  return (
+    <div>
+      <header>
+        <h1>{blogData.name}</h1>
+      </header>
+    </div>
+  )
+
+}
+function About(props) {
+  <img src="https://via.placeholder.com/215" alt="" />
+  return (
+    <div>
+      <aside>
+        <img src={blogData.image} alt="blog logo" />
+        <p>{blogData.about}</p>
+      </aside>
+    </div>
+  )
+
 }
 
-export default App;
+const ArticleList = () => {
+  const { posts } = blogData;
+
+  return (
+    <main>
+      {posts.map(post => (
+        <Article
+          key={post.id}
+          title={post.title}
+          date={post.date}
+          preview={post.preview}
+          minutes={post.minutes}
+        />
+      ))}
+    </main>
+  );
+};
+
+function Article({ title, date, preview, minutes }) {
+  return (
+    <article>
+      <h2>{title}</h2>
+      <p>{date}</p>
+      <p>{preview}</p>
+      <p>{minutes} min read</p>
+    </article>
+  );
+}export default App;
